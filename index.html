@@ -108,7 +108,17 @@
     content:attr(data-caption); position:absolute; left:20px; bottom:16px;
     font-size:.66rem; letter-spacing:.14em; text-transform:uppercase;
     color:rgba(226,201,138,.55); font-weight:700;
+    pointer-events:none;
   }
+  /* Real photo layer — drop a file at the path in each img's src and it
+     will automatically cover the placeholder gradient beneath it. If the
+     file is missing/not-yet-added, onerror hides the <img> so the elegant
+     placeholder keeps showing instead of a broken-image icon. */
+  .ph img{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:center; display:block;
+  }
+  .ph::after{ z-index:1; }
   .ph.light{
     background:
       radial-gradient(120% 140% at 80% 10%, #efe7d3 0%, transparent 55%),
@@ -399,7 +409,9 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="home">
-  <div class="ph" data-caption="Replace with exterior photo of The Glasshouse"></div>
+  <div class="ph" data-caption="Replace with exterior photo of The Glasshouse">
+    <img src="images/hero-exterior.jpg" alt="The Glasshouse exterior" loading="eager" onerror="this.style.display='none'">
+  </div>
   <div class="hero-overlay"></div>
   <div class="wrap hero-content">
     <span class="eyebrow on-dark">The Glasshouse · Lahore</span>
@@ -416,7 +428,9 @@
 <!-- ============ WELCOME ============ -->
 <section class="section welcome" id="venue">
   <div class="wrap split reveal">
-    <div class="ph" data-caption="Interior / arrival photo"></div>
+    <div class="ph" data-caption="Interior / arrival photo">
+      <img src="images/welcome-interior.jpg" alt="The Glasshouse interior" loading="lazy" onerror="this.style.display='none'">
+    </div>
     <div>
       <span class="eyebrow">Welcome to The Glasshouse</span>
       <h2>A Setting Worth Celebrating.</h2>
@@ -483,7 +497,7 @@
     </div>
     <div class="event-cards reveal">
       <a class="event-card" href="#availability">
-        <div class="ph" data-caption="Wedding ceremony photo"></div>
+        <div class="ph" data-caption="Wedding ceremony photo"><img src="images/event-wedding.jpg" alt="Wedding ceremony" loading="lazy" onerror="this.style.display='none'"></div>
         <div class="event-card-overlay">
           <span class="eyebrow on-dark">Weddings</span>
           <h3>Begin Your Forever Here.</h3>
@@ -492,7 +506,7 @@
         </div>
       </a>
       <a class="event-card" href="#availability">
-        <div class="ph" data-caption="Reception dining photo"></div>
+        <div class="ph" data-caption="Reception dining photo"><img src="images/event-reception.jpg" alt="Wedding reception dining" loading="lazy" onerror="this.style.display='none'"></div>
         <div class="event-card-overlay">
           <span class="eyebrow on-dark">Wedding Receptions</span>
           <h3>Celebrate in Style.</h3>
@@ -501,7 +515,7 @@
         </div>
       </a>
       <a class="event-card" href="#availability">
-        <div class="ph" data-caption="Mehndi celebration photo"></div>
+        <div class="ph" data-caption="Mehndi celebration photo"><img src="images/event-mehndi.jpg" alt="Mehndi celebration" loading="lazy" onerror="this.style.display='none'"></div>
         <div class="event-card-overlay">
           <span class="eyebrow on-dark">Mehndi & Engagements</span>
           <h3>Tradition, Reimagined.</h3>
@@ -510,7 +524,7 @@
         </div>
       </a>
       <a class="event-card" href="#availability">
-        <div class="ph" data-caption="Corporate dinner photo"></div>
+        <div class="ph" data-caption="Corporate dinner photo"><img src="images/event-corporate.jpg" alt="Corporate event" loading="lazy" onerror="this.style.display='none'"></div>
         <div class="event-card-overlay">
           <span class="eyebrow on-dark">Corporate Events</span>
           <h3>Business, Beautifully Hosted.</h3>
@@ -519,7 +533,7 @@
         </div>
       </a>
       <a class="event-card" href="#availability">
-        <div class="ph" data-caption="Private celebration photo"></div>
+        <div class="ph" data-caption="Private celebration photo"><img src="images/event-private.jpg" alt="Private celebration" loading="lazy" onerror="this.style.display='none'"></div>
         <div class="event-card-overlay">
           <span class="eyebrow on-dark">Private Celebrations</span>
           <h3>Every Milestone Deserves Its Moment.</h3>
@@ -539,7 +553,9 @@
       <h2>Designed to Leave an Impression.</h2>
       <p>From its distinctive façade and dramatic entrance to its elegant interiors and landscaped surroundings, The Glasshouse has been designed to make every arrival memorable.</p>
     </div>
-    <div class="ph venue-hero-photo reveal" data-caption="Main exterior photo"></div>
+    <div class="ph venue-hero-photo reveal" data-caption="Main exterior photo">
+      <img src="images/venue-exterior-wide.jpg" alt="The Glasshouse exterior, wide view" loading="lazy" onerror="this.style.display='none'">
+    </div>
     <div class="venue-features reveal">
       <div><h3>The Grand Arrival</h3><p>A striking entrance designed to create an immediate sense of occasion.</p></div>
       <div><h3>The Celebration Hall</h3><p>A spacious and adaptable environment designed to transform around your event.</p></div>
@@ -553,7 +569,9 @@
 
 <!-- ============ ARCHITECTURE FEATURE ============ -->
 <section class="arch-feature">
-  <div class="ph" data-caption="Evening architectural photo"></div>
+  <div class="ph" data-caption="Evening architectural photo">
+    <img src="images/architecture-night.jpg" alt="The Glasshouse at night" loading="lazy" onerror="this.style.display='none'">
+  </div>
   <div class="overlay"></div>
   <div class="wrap arch-content reveal">
     <span class="eyebrow on-dark">The Architecture</span>
@@ -588,7 +606,7 @@
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lbClose">✕</button>
   <button class="lightbox-nav prev" id="lbPrev">←</button>
-  <div class="ph" id="lbImage"></div>
+  <div class="ph" id="lbImage"><img id="lbImg" src="" alt="" onerror="this.style.display='none'"></div>
   <button class="lightbox-nav next" id="lbNext">→</button>
   <div class="lightbox-caption" id="lbCaption"></div>
 </div>
@@ -766,9 +784,12 @@
       <p>Follow The Glasshouse for celebrations, inspiration and a closer look at life inside the venue.</p>
     </div>
     <div class="insta-grid reveal">
-      <div class="ph" data-caption=""></div><div class="ph light" data-caption=""></div>
-      <div class="ph" data-caption=""></div><div class="ph light" data-caption=""></div>
-      <div class="ph" data-caption=""></div><div class="ph light" data-caption=""></div>
+      <div class="ph" data-caption=""><img src="images/insta-1.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+      <div class="ph light" data-caption=""><img src="images/insta-2.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+      <div class="ph" data-caption=""><img src="images/insta-3.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+      <div class="ph light" data-caption=""><img src="images/insta-4.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+      <div class="ph" data-caption=""><img src="images/insta-5.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+      <div class="ph light" data-caption=""><img src="images/insta-6.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
     </div>
     <div class="insta-footer reveal"><a href="#" class="btn-text">Follow Us on Instagram →</a></div>
   </div>
@@ -800,13 +821,19 @@
         <p><strong>events@theglasshouse.pk</strong></p>
       </div>
     </div>
-    <div class="ph map-box reveal" data-caption="Map — DHA Phase 6, Lahore"></div>
+    <div class="ph map-box reveal" data-caption="Map — DHA Phase 6, Lahore">
+      <img src="images/map.jpg" alt="Map of The Glasshouse location" loading="lazy" onerror="this.style.display='none'">
+    </div>
+    <!-- Prefer a live map? Replace the block above with a Google Maps embed, e.g.:
+    <iframe src="https://www.google.com/maps/embed?pb=YOUR_EMBED_CODE" style="width:100%;aspect-ratio:21/8;border:0;" loading="lazy"></iframe> -->
   </div>
 </section>
 
 <!-- ============ FINAL CTA ============ -->
 <section class="final-cta">
-  <div class="ph" data-caption="Evening venue photo"></div>
+  <div class="ph" data-caption="Evening venue photo">
+    <img src="images/final-cta-evening.jpg" alt="The Glasshouse in the evening" loading="lazy" onerror="this.style.display='none'">
+  </div>
   <div class="overlay"></div>
   <div class="final-content reveal">
     <span class="eyebrow on-dark">The Glasshouse</span>
@@ -892,26 +919,31 @@
   reveals.forEach(function(el){ io.observe(el); });
 
   // Gallery data
+  // Each entry's "file" is the image Claude expects at images/<file> —
+  // drop a photo there with that exact name and it will appear automatically;
+  // until then the gradient placeholder (with its caption) shows instead.
   var galleryItems = [
-    {cat:'architecture', size:'g-wide',  caption:'Exterior façade'},
-    {cat:'interiors',    size:'g-tall',  caption:'Celebration hall'},
-    {cat:'celebrations', size:'g-square',caption:'Evening celebration'},
-    {cat:'weddings',     size:'g-tall',  caption:'Wedding ceremony'},
-    {cat:'details',      size:'g-square',caption:'Table setting detail'},
-    {cat:'architecture', size:'g-tall',  caption:'Night illumination'},
-    {cat:'interiors',    size:'g-wide',  caption:'Reception layout'},
-    {cat:'weddings',     size:'g-square',caption:'Bridal entrance'},
-    {cat:'celebrations', size:'g-tall',  caption:'Guest arrival'},
-    {cat:'details',      size:'g-wide',  caption:'Floral & lighting detail'},
-    {cat:'architecture', size:'g-square',caption:'Landscaped grounds'},
-    {cat:'weddings',     size:'g-wide',  caption:'First dance'},
+    {cat:'architecture', size:'g-wide',  caption:'Exterior façade',          file:'gallery-architecture-1.jpg'},
+    {cat:'interiors',    size:'g-tall',  caption:'Celebration hall',         file:'gallery-interiors-1.jpg'},
+    {cat:'celebrations', size:'g-square',caption:'Evening celebration',      file:'gallery-celebrations-1.jpg'},
+    {cat:'weddings',     size:'g-tall',  caption:'Wedding ceremony',         file:'gallery-weddings-1.jpg'},
+    {cat:'details',      size:'g-square',caption:'Table setting detail',     file:'gallery-details-1.jpg'},
+    {cat:'architecture', size:'g-tall',  caption:'Night illumination',       file:'gallery-architecture-2.jpg'},
+    {cat:'interiors',    size:'g-wide',  caption:'Reception layout',         file:'gallery-interiors-2.jpg'},
+    {cat:'weddings',     size:'g-square',caption:'Bridal entrance',          file:'gallery-weddings-2.jpg'},
+    {cat:'celebrations', size:'g-tall',  caption:'Guest arrival',            file:'gallery-celebrations-2.jpg'},
+    {cat:'details',      size:'g-wide',  caption:'Floral & lighting detail', file:'gallery-details-2.jpg'},
+    {cat:'architecture', size:'g-square',caption:'Landscaped grounds',       file:'gallery-architecture-3.jpg'},
+    {cat:'weddings',     size:'g-wide',  caption:'First dance',              file:'gallery-weddings-3.jpg'},
   ];
   var grid = document.getElementById('galleryGrid');
   galleryItems.forEach(function(item, i){
     var fig = document.createElement('figure');
     fig.dataset.cat = item.cat;
     fig.dataset.index = i;
-    fig.innerHTML = '<div class="ph '+item.size+'" data-caption="'+item.caption+'"></div>';
+    fig.innerHTML = '<div class="ph '+item.size+'" data-caption="'+item.caption+'">'+
+      '<img src="images/'+item.file+'" alt="'+item.caption+'" loading="lazy" onerror="this.style.display=\'none\'">'+
+      '</div>';
     grid.appendChild(fig);
   });
 
@@ -930,15 +962,17 @@
 
   // Lightbox
   var lb = document.getElementById('lightbox');
-  var lbImage = document.getElementById('lbImage');
   var lbCaption = document.getElementById('lbCaption');
+  var lbImg = document.getElementById('lbImg');
   var currentIndex = 0;
   function visibleFigures(){ return Array.prototype.filter.call(grid.querySelectorAll('figure'), function(f){ return f.style.display !== 'none'; }); }
   function openLightbox(idx){
     var figs = visibleFigures();
     currentIndex = idx;
     var item = galleryItems[figs[idx].dataset.index];
-    lbImage.setAttribute('data-caption','');
+    lbImg.style.display = '';
+    lbImg.src = 'images/' + item.file;
+    lbImg.alt = item.caption;
     lbCaption.textContent = item.caption;
     lb.classList.add('open');
   }
